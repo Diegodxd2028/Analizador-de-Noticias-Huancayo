@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Analizador de Noticias – Huancayo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Previene cache agresivo durante desarrollo -->
+  <meta http-equiv="Cache-Control" content="no-store" />
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900">
+  <main class="max-w-3xl mx-auto p-6">
+    <header class="mb-6">
+      <h1 class="text-2xl font-bold tracking-tight">Detector de Desinformación (SBERT + TF-IDF)</h1>
+      <p class="text-sm text-slate-600 mt-1">Pega texto o ingresa una URL. El modelo devolverá etiqueta, confianza y términos influyentes.</p>
+    </header>
+
+    <!-- Entrada -->
+    <section class="bg-white rounded-2xl p-5 shadow mb-6">
+      <label for="txt" class="block text-sm font-medium">Pega la noticia (texto)</label>
+      <textarea id="txt" class="w-full border rounded-md p-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows="6" placeholder="Pega aquí el contenido…"></textarea>
+
+      <div class="my-4 text-center text-sm text-gray-500 select-none">— o —</div>
+
+      <label for="url" class="block text-sm font-medium">o ingresa una URL</label>
+      <input id="url" type="url" inputmode="url"
+             class="w-full border rounded-md p-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+             placeholder="https://..."/>
+
+      <div class="mt-4 flex items-center gap-3">
+        <button id="btn"
+                class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Analizar
+        </button>
+        <span class="text-xs text-slate-500">Mínimo 30 caracteres si no usas URL.</span>
+      </div>
+    </section>
+
+    <!-- Resultado -->
+    <section id="card" class="hidden bg-white rounded-2xl p-5 shadow space-y-3" aria-live="polite">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold">Resultado</h2>
+        <span id="badge" class="text-sm px-2 py-1 rounded"></span>
+      </div>
+
+      <p id="score" class="text-sm text-slate-700"></p>
+
+      <p id="warn" class="hidden text-sm text-amber-800 bg-amber-100 rounded-md px-3 py-2">
+        Confianza baja: se recomienda revisión humana.
+      </p>
+
+      <p id="terms" class="text-sm text-slate-700"></p>
+
+      <div class="border rounded-lg overflow-hidden">
+        <div class="bg-slate-50 px-3 py-2 text-xs font-mono text-slate-500">Respuesta cruda</div>
+        <pre id="raw" class="bg-black text-green-200 p-3 text-sm overflow-auto"></pre>
+      </div>
+    </section>
+
+    <footer class="mt-8 text-center text-xs text-slate-500">
+      Prototipo académico • Universidad Continental • Huancayo, Junín
+    </footer>
+  </main>
+
+  <!-- Tu lógica de frontend -->
+  <script src="./app.js" defer></script>
+</body>
+</html>
