@@ -98,3 +98,9 @@ fetch(`${API}/`)
   .then((r) => r.json())
   .then((j) => console.log("API OK:", j))
   .catch((err) => console.error("API no accesible:", err));
+
+  // al finalizar con éxito:
+window.postMessage("analysis:done", "*");
+// en catch:
+window.postMessage("analysis:error", "*");
+// en finally no hace falta, ya mandaste uno u otro
